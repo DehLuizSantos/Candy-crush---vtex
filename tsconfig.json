@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "styles/*": ["src/styles/*"],
+      "components/*": ["src/components/*"],
+      "classes/*": ["src/classes/*"],
+      "assets/*": ["src/assets/*"],
+      "utils/*": ["src/utils/*"],
+      "helpers/*": ["src/helpers/*"]
+    }
+  },
+  "include": [
+    "vite.config.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/classes/candy.js",
+    "src/classes/candy.js"
+  ],
+  "exclude": ["node_modules"]
+}
