@@ -1,3 +1,4 @@
+import { Button } from 'components/Button';
 import styled from 'styled-components';
 
 export const GameBoardWrapper = styled.div`
@@ -28,8 +29,19 @@ export const Canvas = styled.canvas`
   opacity: 0.7;
 `;
 
-export const Buttons = styled.div`
+export const Controllers = styled.div`
   display: flex;
   justify-content: center;
-  margin: 15px 0;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 50%;
 `;
+
+export const ScoreLabel = styled.div`
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  margin: 15px 0;
+  padding: 5px;
+`;
+
+export const NewGameButton = styled(Button)``;

@@ -1,9 +1,9 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import * as S from './styles';
 import { useState, useEffect } from 'react';
 import { ICandy, IDragDropInfo, IDetails, IDirections } from './interfaces';
-import { getImageByColorName, isValidLocation } from 'helpers/index';
+import { getImageByColorName, isValidLocation, resetScore, incrementScore } from 'helpers/index';
 import { DEFAUL_SQUARE_DATA, DEFAULT_BOARD_SIZE, COLORS } from 'utils/constants';
-import { Button } from 'components/Button';
 import Candy from 'classes/candy';
 import $ from 'jquery';
 
@@ -12,6 +12,7 @@ let candyCounter = 0;
 const GameBoard = () => {
   const [square, setSquare] = useState<any>(DEFAUL_SQUARE_DATA);
   let dragDropInfo: IDragDropInfo | null = null;
+  let scoring = false;
 
   const getCandyAt = (row: number, col: number) => {
     if (isValidLocation(row, col)) {
@@ -272,12 +273,14 @@ const GameBoard = () => {
     for (let j = 0; j < setOfSetsOfCrushes.length; j++) {
       const set = setOfSetsOfCrushes[j];
       for (let k = 0; k < set.length; k++) {
+        if (scoring) incrementScore(set[k], set[k].row, set[k].col);
         remove(set[k]);
       }
     }
   };
 
   const prepareNewGame = () => {
+    scoring = false;
     // eslint-disable-next-line no-constant-condition
     while (true) {
       populateBoard();
@@ -285,6 +288,8 @@ const GameBoard = () => {
       if (crushable.length == 0) break;
       removeCrushes(crushable);
     }
+
+    scoring = true;
   };
 
   const ClearCanvas = () => {
@@ -374,6 +379,7 @@ const GameBoard = () => {
   const onNewGame = () => {
     clear();
     ClearCanvas();
+    resetScore();
     prepareNewGame();
   };
 
@@ -535,7 +541,10 @@ const GameBoard = () => {
       <S.Canvas id='canvas' width='320' height='320'>
         <p>Canvas not supported on your browser.</p>
       </S.Canvas>
-      <Button onAction={() => onNewGame()}>NEW GAME</Button>
+      <S.Controllers>
+        <S.ScoreLabel id='scoreLabel'>0 points</S.ScoreLabel>
+        <S.NewGameButton onAction={() => onNewGame()}>NEW GAME</S.NewGameButton>
+      </S.Controllers>
     </>
   );
 };
